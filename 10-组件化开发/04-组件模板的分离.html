@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{msg}}
+    <cpn1></cpn1>
+    <cpn2></cpn2>
+</div>
+
+<!--1.抽离方式1：使用script标签 type="text/x-template"-->
+<script type="text/x-template" id="cpn1">
+    <div>
+        <h2>我是标题1</h2>
+        <p>我是内容：今天天气很好</p>
+    </div>
+</script>
+
+<!--2.抽离方式2：使用template标签-->
+<template id="cpn2">
+    <div>
+        <h2>我是标题2</h2>
+        <p>我是内容：我想去游泳</p>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    Vue.component('cpn1',{
+        template:'#cpn1'
+    })
+
+    Vue.component('cpn2',{
+        template: '#cpn2'
+    })
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello vue'
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <cpn></cpn>
+    <cpn></cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <h2>{{count}}</h2>
+        <button @click="increment">+</button>
+        <button @click="decrement" :disabled="count<=0">-</button>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+    //这样先定义要返回的内容，就是相同的实例
+    const counter = {count: 0};
+
+    Vue.component('cpn', {
+        template: '#cpn',
+        data: function () { //函数保证每次返回都是一个新的单独的实例，确保组件的复用性
+            // return counter
+            return {
+                count: 0
+            }
+        },
+        methods: {
+            increment() {
+                this.count++
+            },
+            decrement() {
+                this.count--
+            }
+        }
+    })
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello vue'
+        }
+    })
+</script>
+
+<script>
+    /**
+     * 组件是要复用的，data中如果不是函数的话，就不能保证组件每一次的使用是单独的一个实例，
+     *  可能会变成下面这样，三个实例其实都是同一个
+     */
+
+    const obj = {
+        name: 'zs',
+        age: 18
+    }
+
+    function test() {
+        return obj;
+    }
+
+    let obj1 = test();
+    let obj2 = test();
+
+    obj.name = 'wb';
+    console.log(obj1);
+    console.log(obj2);
+</script>
+</body>
+</html>

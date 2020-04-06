@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <cpn1 :childtitle="title" :childcontent="content"></cpn1>
+    <cpn1 :childcontent="content"></cpn1>
+</div>
+
+<template id="cpn1">
+    <div>
+        <h2>{{childtitle}}</h2>
+        <ul>
+            <li v-for="item in childcontent">{{item}}</li>
+        </ul>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+    const cpn1 = {
+        template: '#cpn1',
+        // props:['childtitle','childcontent'],  //数组形式
+        /*props:{ //对象形式，类型限制
+          childtitle:String,
+          childcontent:Array
+        },*/
+        props: { //对象形式，属性也是对象形式
+            //默认值和必传值
+            childtitle: {
+                type: String,
+                default: '好看的国产动画片'
+            },
+            childcontent: {
+                type: Array,
+                //default:[],//如果默认值是Object和Array时，必须使用函数返回一个默认值
+                default:function(){
+                    return []
+                },
+                required:true
+            }
+        },
+        data: function () { //函数，保证组件的每一次使用都是单独的一个实例
+            return {}
+        }
+    }
+
+    Vue.component('cpn1', cpn1);
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            title: 'hello vue',
+            content: ['中华小子', '秦时明月', '虹猫蓝兔']
+        }
+    })
+</script>
+</body>
+</html>

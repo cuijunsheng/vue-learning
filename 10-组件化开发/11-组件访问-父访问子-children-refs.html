@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <cpn ref="c1"></cpn>
+    <cpn ref="c2"></cpn>
+    <cpn ref="c3"></cpn>
+    <button @click="callChild">按钮</button>
+</div>
+
+<template id="cpn">
+    <div>
+        <h2>子组件</h2>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello vue'
+        },
+        methods:{
+            /**
+             * 1。children默认是一个数组，包含多个VueComponent对象，通过下标获取对应子组件对象
+             */
+            /*callChild(){
+                console.log(this.$children);
+                console.log(this.$children[0].name) //调用子组件的data中变量
+                this.$children[0].showMessage() //调用子组件的方法
+            }*/
+            /**
+             * 2. refs 默认返回一个空对象,使用组件的时候添加ref属性即可使用 ref='aaa'
+             */
+            callChild(){
+                console.log(this.$refs);
+                console.log(this.$refs.c1.name);
+                this.$refs.c1.showMessage();
+                console.log('-----------------------------');
+                console.log(this.$refs.c2.name);
+                this.$refs.c2.showMessage();
+            }
+        },
+        components:{
+            cpn:{
+                template:'#cpn',
+                data(){
+                    return{
+                      name:'我是子组件的名字'
+                    }
+                },
+                methods:{
+                    showMessage(){
+                        console.log('我是子组件的方法');
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

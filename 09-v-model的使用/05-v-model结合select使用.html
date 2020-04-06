@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <select v-model="fruit">
+        <option value="西瓜">西瓜</option>
+        <option value="草莓">草莓</option>
+        <option value="香蕉">香蕉</option>
+        <option value="菠萝">菠萝</option>
+        <option value="苹果">苹果</option>
+    </select>
+    <h2>你选择的水果是：{{fruit}}</h2>
+
+    <br>
+    <select v-model="fruits" multiple>
+        <option value="西瓜">西瓜</option>
+        <option value="草莓">草莓</option>
+        <option value="香蕉">香蕉</option>
+        <option value="菠萝">菠萝</option>
+        <option value="苹果">苹果</option>
+    </select>
+    <h2>你选择的水果是：{{fruits}}</h2>
+    <br>
+    <select v-model="fruits" multiple>
+        <option v-for="item in originalFruits" :value="item">{{item}}</option>
+    </select>
+    <h2>你选择的水果是：{{fruits}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            fruit:'苹果',
+            fruits:[],
+            originalFruits:['西瓜','香蕉','苹果','菠萝','草莓']
+        }
+    })
+</script>
+</body>
+</html>

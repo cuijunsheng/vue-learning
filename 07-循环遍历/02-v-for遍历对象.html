@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--1.只遍历对象的value-->
+    <ul>
+        <li v-for="value in person">{{value}}</li>
+    </ul>
+
+    <!--2. 遍历key和value-->
+    <ul>
+        <li v-for="(value,key) in person">{{value}}---{{key}}</li>
+    </ul>
+
+    <!--3.遍历key,value,index-->
+    <ul>
+        <li v-for="(value,key,index) in person">{{value}}--{{key}}--{{index}}</li>
+    </ul>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            person:{
+                id:1,
+                name:'zs',
+                age:18
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    //1.属性的增强写法
+    const name = 'xiaohua';
+    const age = 18;
+    const height=1.88;
+
+    const person={
+        name,
+        age,
+        height
+    }
+
+    console.log(person);
+
+    //2.函数的增强
+    //es5写法
+    const obj1={
+        id:1,
+        name:'xiaohua',
+        run:function () {
+            console.log("跑---es5");
+        }
+    }
+
+    //es6写法
+    const obj2={
+        id:2,
+        name:'xiaocao',
+        run(){
+            console.log('跑---es6');
+        }
+    }
+
+    obj1.run();
+    obj2.run()
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!--1.lazy修饰符，不实时更新数据，而是失去焦点和回车后改变-->
+    <p>
+        <input type="text" v-model.lazy="msg">
+        <h2>{{msg}}</h2>
+    </p>
+
+    <!--2.number修饰符，始终保持输入的是number类型-->
+    <p>
+        <input type="number" v-model.number="age">
+        <h2>{{age}}---{{typeof age}}</h2>
+    </p>
+
+    <!--3.trim去掉左右两边多余空格-->
+    <p>
+        <input type="text" v-model.trim="name">
+        <h2>{{name}}</h2>
+    </p>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello vue',
+            age:18,
+            name:''
+        }
+    })
+</script>
+</body>
+</html>

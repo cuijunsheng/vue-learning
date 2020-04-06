@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+
+<script>
+
+    /**
+     * 1.没有块级作用域引发的问题，for块级域 es5中，只用函数有作用域，所以需要闭包
+     var btns = document.getElementsByTagName('button');
+     * 问题：不管点击哪一次都是显示点击的第5次，因为i已经被改变了，
+
+     */
+
+    var a = 10;
+
+    {
+        var a = 11;
+    }
+
+    console.log(a)
+
+    var btns = document.getElementsByTagName('button');
+    /*for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function () {
+            console.log("点了第" + i + "个按钮")
+        })
+
+    }*/
+
+    //使用闭包解决
+    for (var i = 0; i < btns.length; i++) {
+        (function (i) {//函数是有作用域的，当前传入的i,只对当前函数有效
+            btns[i].addEventListener("click", function () {
+                console.log("点了第" + (i + 1) + "个按钮")
+            })
+        })(i)
+
+    }
+
+</script>
+</body>
+</html>

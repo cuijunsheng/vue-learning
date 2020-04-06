@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <cpn :c-person="person" :child-msg="msg"></cpn>
+</div>
+
+<template id="cpn">
+    <!--Vue组件包含多个元素时，必须有一个根元素把其他内容包含起来-->
+    <div>
+        <h2>{{cPerson}}</h2>
+        <p>{{childMsg}}</p>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    //子组件的prop是驼峰命名，则在使用组件的时候绑定属性需要用c-person的形式代替驼峰
+    const cpn = {
+        template: '#cpn',
+        props: {
+            cPerson: {
+                type: Object,
+                default: function () {
+                    return {}
+                }
+            },
+            childMsg: {
+                type: String,
+                default() {
+                    return '11'
+                }
+            }
+        }
+    }
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello vue',
+            person: {
+                name: 'zs',
+                age: 18
+            }
+        },
+        components: {
+            cpn
+        }
+    })
+</script>
+</body>
+</html>

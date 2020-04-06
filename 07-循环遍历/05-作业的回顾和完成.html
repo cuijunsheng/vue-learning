@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(item,index) in beauty" :class="{class1:currentIndex===index}" @click="click1(index)">{{item}}</li>
+    </ul>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+           beauty :[
+                '貂蝉','杨贵妃','王昭君','西施'
+            ],
+            currentIndex:0
+        },
+        methods:{
+            click1(index){
+                this.currentIndex=index;
+            }
+        }
+    })
+</script>
+
+<style>
+    .class1{
+        color: red;
+    }
+</style>
+</body>
+</html>

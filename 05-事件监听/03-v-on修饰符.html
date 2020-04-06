@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--1. .stop修饰符阻止冒泡-->
+    <div @click="divClick">
+        11111111
+    <button @click.stop="btnClick">stop修饰符</button>
+    </div>
+
+    <!--2. .prevent 阻止默认行为-->
+    <form action="baidu">
+        <button type="submit" @click.prevent="subClick">提交</button>
+    </form>
+
+    <!--3. 只当事件从特定触发时才调用-->
+    <input @keyup.enter="fun1">
+
+    <!--4. 点击只会触发一次回调-->
+    <button @click.once="click2">按钮2</button>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello vue'
+        },
+        methods:{
+            divClick(){
+                console.log("divClick");
+            },
+            btnClick(){
+                console.log("btnClick");
+            },
+            subClick(){
+                console.log("subClick");
+            },
+            fun1(){
+                console.log("fun1");
+            },
+            click2(){
+                console.log("click2");
+            }
+        }
+    })
+</script>
+</body>
+</html>

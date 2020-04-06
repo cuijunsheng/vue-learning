@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+<button>按钮4</button>
+<button>按钮5</button>
+<script>
+    //1.块级作用域
+    /* {
+         var name = '张三';
+         console.log(name);
+     }
+     console.log(name)*/
+
+    /**
+     * 2.没有块级作用域引发的问题，if块级域,本来想要输出小花，结果调用之前name被改成了小草
+     * 输出也变成了小草
+     */
+
+    var fun1;
+    if (true) {
+
+        fun1 = function () {
+            console.log(name);
+        }
+    }
+    name = "小草";
+    fun1();
+
+    /**
+     * 3.没有块级作用域引发的问题，for块级域 es5中，只用函数有作用域，所以需要闭包
+     var btns = document.getElementsByTagName('button');
+     * 问题：不管点击哪一次都是显示点击的第5次，因为i已经被改变了，
+
+     */
+    /*for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function () {
+            console.log("点了第" + i + "个按钮")
+        })
+
+    }*/
+
+    //使用闭包解决
+    for (var i = 0; i < btns.length; i++) {
+        (function (i) {//函数是有作用域的，当前传入的i,只对当前函数有效
+            btns[i].addEventListener("click", function () {
+                console.log("点了第" + (i + 1) + "个按钮")
+            })
+        })(i)
+
+    }
+
+    /**
+     * es5中
+     */
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function () {
+            console.log("点了第" + i + "个按钮")
+        })
+
+        /**
+         *  相当于在外面定义了一个i
+         *  var i = 0
+         */
+
+        { //i = 0
+            btns[i].addEventListener("click", function () {
+                //此函数不是立即执行的，点击的时候才会执行，这时候开始找i,发现i已经被改成了5
+
+                console.log("点了第" + i + "个按钮")
+            })
+        }
+
+        { //i = 1,这个时候，上面定义的i，也就是for循环中的i已经变成了1
+            btns[i].addEventListener("click", function () {
+                console.log("点了第" + i + "个按钮")
+            })
+        }
+
+        { //i = 2
+            btns[i].addEventListener("click", function () {
+                console.log("点了第" + i + "个按钮")
+            })
+        }
+
+        { // i = 5
+            btns[i].addEventListener("click", function () {
+                console.log("点了第" + i + "个按钮")
+            })
+        }
+
+        { //i = 4 ,这个时候，改变的都是同一个i, i = 4 ,再++ i = 5
+            btns[i].addEventListener("click", function () {
+                console.log("点了第" + i + "个按钮")
+            })
+        }
+
+        /**
+         * es6中，let
+         */
+        for (let i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                console.log("点了第" + i + "个按钮")
+            })
+
+            { //i = 0 i有了作用域,该作用域中的i都是0，别人无法改变
+                btns[i].addEventListener("click", function () {
+                    console.log("点了第" + i + "个按钮")
+                }
+            }
+
+            {//i = 1 i有了作用域,该作用域中的i都是1，别人无法改变.。。。
+                btns[i].addEventListener("click", function () {
+                    console.log("点了第" + i + "个按钮")
+                }
+            }
+
+            {
+                btns[i].addEventListener("click", function () {
+                    console.log("点了第" + i + "个按钮")
+                }
+            }
+
+            {
+                btns[i].addEventListener("click", function () {
+                    console.log("点了第" + i + "个按钮")
+                }
+            }
+
+            {
+                btns[i].addEventListener("click", function () {
+                    console.log("点了第" + i + "个按钮")
+                }
+            }
+</script>
+</body>
+</html>

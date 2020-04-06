@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--父组件模板-->
+<div id="app">
+    <cpn @increment="changeTotal" @decrement="changeTotal"></cpn>
+    <h2>{{total}}</h2>
+</div>
+
+<!--子组件模板-->
+<template id="cpn">
+    <div>
+        <button @click="increment">+</button>
+        <button @click="decrement">-</button>
+    </div>
+
+</template>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    //子组件1
+    const cpn = {
+        template: '#cpn',
+        data: function () {
+            return {
+                count:0
+            }
+        },
+        methods:{
+            increment(){ //子组件发射事件，父组件监听该自定义事件
+                this.count++;
+                this.$emit('increment',this.count)
+            },
+            decrement(){
+                this.count--;
+                this.$emit('decrement',this.count)
+            }
+        }
+    }
+
+    //父组件
+    const app = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello vue',
+            total:0
+        },
+        components: {
+            cpn
+        },
+        methods: {
+            changeTotal(count){
+                this.total=count;
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--插槽的作用域就是：父组件替换插槽的标签，但是数据由子组件来提供-->
+    <cpn></cpn>
+
+    <!--获取子组件的数据-->
+    <cpn >
+        <template slot-scope="slot">
+            <span v-for="item in slot.data">{{item}} - </span>
+        </template>
+    </cpn>
+
+    <cpn>
+        <div slot-scope="s">
+            <span v-for="item in s.data">{{item}} * </span>
+        </div>
+    </cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <!--data不是固定的可以起名abc都可以-->
+        <slot  :data="pLanguage">
+            <ul>
+                <li v-for="item in pLanguage">{{item}}</li>
+            </ul>
+        </slot>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello vue'
+        },
+        components:{
+            cpn:{
+                template:'#cpn',
+                data(){
+                    return{
+                        pLanguage:['C','JAVA','Python','PHP','Go','Swift']
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

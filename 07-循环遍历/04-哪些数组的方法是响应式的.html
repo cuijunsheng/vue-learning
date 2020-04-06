@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="item in letters">{{item}}</li>
+    </ul>
+
+    <button @click="btnClick">点我</button>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            letters:['a','b','c','f','e']
+        },
+        methods:{
+            btnClick() {
+                /**
+                 * 数组中哪些方法是响应式的
+                 */
+                //1.push 向数组尾部追加元素，可以追加多个
+                //this.letters.push('aaa','bbb');
+
+                //2.pop 数组从尾部删除元素
+                //this.letters.pop();
+
+                //3.shift 数组从前面删除元素
+                // this.letters.shift();
+
+                //4. unshift 数组从前面添加元素，可以添加多个
+                // this.letters.unshift('aaa','bbb')
+
+                /**5. splice 可以添加删除元素
+                 *三个参数，第一个为数组的下标，表示从哪个开始操作
+                */
+                //删除的时候，arg1为从哪开始删除（包括），arg2为删除的个数
+                //this.letters.splice(1,2)
+
+                //添加的时候 arg1从哪开始添加（此位置之前），arg2设置为0，否则会删除，arg3为要添加的
+                //this.letters.splice(1,0,'m','n')
+
+                //6.sort
+                // this.letters.sort();
+
+                //7.reverse
+                //this.letters.reverse()
+
+                /**
+                 * 注意，通过数组下标修改元素不是响应式的
+                 * 可以通过splice方法修改,其实arg2就是要删除几个
+                 */
+                this.letters.splice(0,1,'m')
+            }
+        }
+    })
+</script>
+</body>
+</html>

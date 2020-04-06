@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--在使用v-for时，对标签元素添加key后，如果往数组中间添加内容，则可以提高效率
+        1.不添加key的时候，往中间插入元素，原来的元素会依次往后挪（F->2的位置，原来2位置上的C挪到3的位置）
+        2.添加key以后，虚拟dom会将原来的key和内容一一对应，新插入的挪到对用位置-->
+    <ul>
+        <li v-for="item in letters" :key="item">{{item}}</li>
+    </ul>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+           letters:['A','B','C','D','E']
+        }
+    })
+</script>
+</body>
+</html>
