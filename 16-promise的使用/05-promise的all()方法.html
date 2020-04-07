@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    /**
+     *  1.  有一个需求，需要发送2次网络请求，只有拿到2次结果，才能实现这个需求，正常逻辑代码如下所示,
+     * 因为不确定哪个请求先返回，所以无法在一个请求的success里进行直接处理
+     */
+    /*let isResult1 = false;
+    let isResult2 = false;
+
+    $ajax({
+        url:'url1',
+        data:{
+            ...
+        },
+        success:function (data) {
+            console.log(data);
+            isResult1 = true;
+
+            handleRequest()
+        }
+    })
+
+    $ajax({
+        url:'url2',
+        data:{
+            ...
+        },
+        success:function (data) {
+            console.log(data);
+            isResult2 = true;
+
+            handleRequest()
+        }
+    })
+
+    function handleRequest() {
+        if(isResult1&&isResult2){
+            //只有当第一次和第二次请求全部完成，才能进行下一步处理，完成该需求
+        }
+    }*/
+
+    /**
+     * 2.使用promise的all()方法
+     *      参数是一个可迭代对象iterator,因为数组是可遍历的，所以可以充当参数,然后数组里有两个new的Promise对象，
+     * 分别处理发送第一次和第二次网络请求，都成功后回调then()处理，then拿到一个2个长度的数组，里面是2次请求的结果
+     *  因为需求2次请求都成功后处理，所以会等2分钟后调用then()
+     */
+    Promise.all([
+        new Promise((resolve,reject)=>{
+            //模拟网络请求
+            setTimeout(()=>{
+               resolve("aaa")
+            },2000)
+        }),
+        new Promise((resolve,reject)=>{
+            //模拟网络请求
+            setTimeout(()=>{
+                //resolve("bbb")
+                reject("error message") //2次中有一次失败，都会走catch()
+            },1000)
+        })
+    ]).then(results=>{
+        console.log(results);
+    }).catch(err=>{
+        console.log(err);
+    })
+</script>
+</body>
+</html>

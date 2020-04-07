@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    //promise主要用于对多次异步请求的调用的封装，链式调用
+    new Promise((resolve, reject) => {
+        //第一次请求的代码
+        setTimeout(function () {
+            resolve()
+        }, 1000)
+    }).then(function () {
+        //第一次拿到结果后的处理代码
+        console.log('first request process');
+
+        return new Promise((resolve, reject) => {
+            //第二次请求的代码
+            setTimeout(function () {
+                resolve()
+            }, 1000)
+        })
+    }).then(function () {
+        //第二次拿到结果后的处理代码
+        console.log('second request process');
+
+        return new Promise((resolve, reject) => {
+            //第三次请求的代码
+            setTimeout(function () {
+                resolve()
+            }, 1000)
+        })
+    }).then(function () {
+        //第三次拿到结果后的处理代码
+        console.log('third request process');
+
+    })
+</script>
+</body>
+</html>

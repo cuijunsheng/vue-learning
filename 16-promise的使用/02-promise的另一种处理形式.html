@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    /**
+     * 另外一种处理形式，在then()里传两个参数，一个是成功的回调，另一个是失败的回调
+     */
+    new Promise((resolve, reject) => {
+        //resolve("hello vue.js")
+
+        reject("error message")
+    }).then(data => {
+        console.log(data);
+    }, err => {
+        console.log(err);
+    })
+</script>
+</body>
+</html>

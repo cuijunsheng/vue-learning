@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    /**
+     * promise
+     * 一般情况下有异步操作时，会使用promise对异步操作进行封装，将请求和回调处理明确分开进行
+     */
+    new Promise((resolve, reject) => {
+        //发送异步请求(模拟异步请求)
+        setTimeout(()=>{
+            let person={id:1,name:'zs',age:18}
+            /**
+             * 异步请求后拿到结果不在这里处理，而是调用resolve后，结果会去then()里面，然后在那里处理
+             * 1.请求成功时调用resolve()，结果去then()里执行
+             */
+            resolve(person)
+
+            /**
+             * 2.请求失败时调用reject(),结果去catch()里执行
+             */
+            //reject("err message")
+        },1000)
+    }).then((data) => {
+        //处理异步请求成功返回的结果
+        console.log("异步请求成功返回的结果:"+data);
+    }).catch((data)=>{
+        //处理异步请求失败返回的结果
+        console.log("异步请求失败返回的结果："+data);
+    })
+
+
+
+</script>
+</body>
+</html>
